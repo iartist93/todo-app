@@ -136,6 +136,8 @@ form.onsubmit = (e) => {
 
   // Dispatch an action to add a new todo
   dispatch(addTodo(newTodo));
+  todoTextInput.value = "";
+  todoTextContent.value = "";
 };
 
 const drag = (ev) => {
