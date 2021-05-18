@@ -1,5 +1,16 @@
 # TODO App
 
+- I started this app from scratch as a simple exercise in one of my Udacity react sessions meetings, then I got inspired to continue working on it and add more features to see how far I can go with it.
+- I don't used any framework or library, just Vanilla-JS and redux (will be replaced soon with my custom redux implementation) for state managment.
+
+---
+
+## Live Preview
+
+- https://mkqtt.csb.app/
+
+---
+
 ## TODO List 😂😂
 
 - [ ] button hover/focus heightlights.
