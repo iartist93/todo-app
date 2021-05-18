@@ -7,7 +7,7 @@
 
 ## Live Preview
 
-- https://mkqtt.csb.app/
+- https://oknext.netlify.app/
 
 ---
 
@@ -35,5 +35,6 @@
 - [ ] add my redux-implementation to the project.
 - [ ] implement the search funcionality
 - [ ] add filter action future feature.
+- [ ] add timestamp to the state.
 
 ---
