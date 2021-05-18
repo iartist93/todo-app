@@ -94,11 +94,27 @@ subscribe(() => onStateUpdate());
 //-----------------------------------------------------------//
 // UI quries
 
-const form = document.getElementById("todo-form");
+const form = document.querySelector(".todo-form");
 const todoListElement = document.querySelector(".todo-list");
 const todoTextInput = document.querySelector(".todo-input-title");
 const todoTextContent = document.querySelector(".todo-input-content");
 const todoCompletedInput = document.querySelector("#input-completed-checkbox");
+
+const modalContainer = document.querySelector(".modal-container");
+const addNewButton = document.querySelector("#add-new-btn");
+
+//-----------------------------------------------------------//
+// Modal Events
+
+addNewButton.onclick = (event) => {
+  modalContainer.style.display = "flex";
+};
+
+window.onclick = (event) => {
+  if (event.target === modalContainer) {
+    modalContainer.style.display = "none";
+  }
+};
 
 //-----------------------------------------------------------//
 // UI events

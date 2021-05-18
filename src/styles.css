@@ -9,8 +9,41 @@ body {
   box-sizing: border-box;
 }
 
+.round-button {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: rgb(0, 75, 255);
+  border-radius: 8px;
+  border: none;
+  color: white;
+  min-width: 80px;
+  height: 40px;
+  margin-left: 20px;
+  transition: all 0.3s ease;
+}
+
+.round-button:hover {
+  background-color: rgb(51, 112, 255);
+}
+
+.round-button:active {
+  background-color: rgb(0, 62, 206);
+}
+
 /* --------------------------------------------------- */
-/* sections */
+/* options bar */
+
+.actions {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 50px;
+  justify-content: space-between;
+}
+
+/* --------------------------------------------------- */
+/* todo sections */
 
 .todo-sections {
   display: flex;
@@ -101,7 +134,7 @@ body {
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  padding-top: 4px;
+  /* padding-top: 4px; */
   padding-left: 20px;
 }
 
@@ -152,6 +185,40 @@ body {
 }
 
 /* --------------------------------------------------- */
+/* Add new todo modal */
+
+.modal-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(32, 32, 34, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  z-index: 1;
+}
+
+.todo-form {
+  position: relative;
+  animation-name: showModal;
+  animation-duration: 0.2s;
+}
+
+@keyframes showModal {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0px;
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------------------- */
 /* Add new todo container */
 
 .todo-input-container {
@@ -165,6 +232,10 @@ body {
   box-sizing: border-box;
   padding: 20px;
   margin-bottom: 30px;
+
+  -webkit-box-shadow: 2px 2px 17px -1px rgba(219, 218, 232, 1);
+  -moz-box-shadow: 2px 2px 17px -1px rgba(219, 218, 232, 1);
+  box-shadow: 2px 2px 17px -1px rgba(219, 218, 232, 1);
 }
 
 .todo-input-title {
@@ -182,6 +253,8 @@ body {
   margin-top: 10px;
   background: white;
   height: 100px;
+  min-height: 60px;
+  max-height: 500px;
   resize: vertical;
   width: 90%;
   border-radius: 5px;
@@ -217,7 +290,7 @@ body {
   cursor: pointer;
 }
 
-#create {
+/* #create {
   padding: 10px;
   font-size: 18px;
   font-weight: 500;
@@ -228,12 +301,6 @@ body {
   width: 80px;
   height: 40px;
   margin-left: 20px;
-}
-
-#todo-form {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
+} */
 
 /* --------------------------------------------------- */

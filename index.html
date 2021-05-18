@@ -27,22 +27,6 @@
         const targetSectionClass = ev.target.classList[0];
         const targetSectionId = ev.target.id;
 
-        /*
-           todo-1
-           section1
-           todo-list-container drag-dist
-           todo-list-container drag-dist
-           section2
-        */
-        console.log(todoId);
-        console.log(todo);
-
-        console.log(sourceSectionId);
-        console.log(sourceSecionClass);
-
-        console.log(targetSectionClass);
-        console.log(targetSectionId);
-
         if (
           targetSectionClass === TARGET_CLASS &&
           targetSectionId !== sourceSectionId
@@ -54,42 +38,60 @@
     </script>
   </head>
 
+  <!-------------------- Body----------------------------->
+
   <body>
     <div class="container">
       <h1>Awesome Todo App</h1>
+      <div class="actions">
+        <input placeholder="Search todos..." />
+        <button id="add-new-btn" class="round-button" onclick="this.blur();">
+          + New Item
+        </button>
+      </div>
 
-      <form id="todo-form">
-        <div class="todo-input-container">
-          <input
-            class="todo-input-title"
-            type="text"
-            name="text"
-            placeholder="New todo..."
-            required
-          />
-          <textarea
-            class="todo-input-content"
-            placeholder="What's in your mind?"
-            value="test"
-          ></textarea>
-          <div class="todo-input-footer">
-            <div id="input-completed">
-              <label id="input-completed-label" for="completed">
-                Completed
-              </label>
-              <input
-                id="input-completed-checkbox"
-                type="checkbox"
-                name="completed"
-              />
+      <!------------------------ Add Form ---------------------------->
+      <div class="modal-container">
+        <form class="todo-form">
+          <div class="todo-input-container">
+            <input
+              class="todo-input-title"
+              type="text"
+              name="text"
+              placeholder="New todo..."
+              required
+            />
+            <textarea
+              class="todo-input-content"
+              placeholder="What's in your mind?"
+              value="test"
+            ></textarea>
+            <div class="todo-input-footer">
+              <div id="input-completed">
+                <label id="input-completed-label" for="completed">
+                  Completed
+                </label>
+                <input
+                  id="input-completed-checkbox"
+                  type="checkbox"
+                  name="completed"
+                />
+              </div>
+
+              <button
+                type="submit"
+                id="create"
+                class="round-button"
+                onclick="this.blur();"
+              >
+                Add
+              </button>
             </div>
-
-            <button type="submit" id="create">
-              + Add
-            </button>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
+
+      <!--------------------- sections ----------------------------->
 
       <section class="todo-sections">
         <section
@@ -113,7 +115,7 @@
           ondragover="allowDrop(event)"
         >
           <header class="todo-list-header">
-            <h3>To do</h3>
+            <h3>In Progress</h3>
           </header>
           <main class="todo-list"></main>
         </section>
@@ -125,7 +127,7 @@
           ondragover="allowDrop(event)"
         >
           <header class="todo-list-header">
-            <h3>To do</h3>
+            <h3>Review</h3>
           </header>
           <main class="todo-list"></main>
         </section>
@@ -137,31 +139,13 @@
           ondragover="allowDrop(event)"
         >
           <header class="todo-list-header">
-            <h3>To do</h3>
+            <h3>Done</h3>
           </header>
           <main class="todo-list"></main>
         </section>
       </section>
-    </div>
 
-    <div>
-      <div
-        class="drag-dist"
-        ondrop="drop(event)"
-        ondragover="allowDrop(event)"
-      ></div>
-      <div
-        class="drag-dist"
-        ondrop="drop(event)"
-        ondragover="allowDrop(event)"
-      ></div>
-      <div class="drag-dist" ondrop="drop(event)" ondragover="allowDrop(event)">
-        DragHere
-      </div>
-
-      <div class="drag-item" draggable="true" ondragstart="drag(event)">
-        Drag Me
-      </div>
+      <!----------------------------------------------------------->
     </div>
 
     <script src="src/index.js"></script>

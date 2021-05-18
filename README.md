@@ -11,6 +11,15 @@
 
 ---
 
+## Install Locally
+
+```sh
+> npm install
+> npm start
+```
+
+---
+
 ## TODO List 😂😂
 
 - [ ] button hover/focus heightlights.
