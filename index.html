@@ -10,14 +10,46 @@
       rel="stylesheet"
     />
     <script>
+      const TARGET_CLASS = "todo-list-container";
+
       function allowDrop(ev) {
         ev.preventDefault();
       }
 
       function drop(ev) {
         ev.preventDefault();
-        var data = ev.dataTransfer.getData("class");
-        ev.target.appendChild(document.getElementsByClassName(data)[0]);
+        const todoId = ev.dataTransfer.getData("id");
+        const todo = document.getElementById(todoId);
+
+        const sourceSectionId = ev.dataTransfer.getData("parentId");
+        const sourceSecionClass = ev.dataTransfer.getData("parentClass");
+
+        const targetSectionClass = ev.target.classList[0];
+        const targetSectionId = ev.target.id;
+
+        /*
+           todo-1
+           section1
+           todo-list-container drag-dist
+           todo-list-container drag-dist
+           section2
+        */
+        console.log(todoId);
+        console.log(todo);
+
+        console.log(sourceSectionId);
+        console.log(sourceSecionClass);
+
+        console.log(targetSectionClass);
+        console.log(targetSectionId);
+
+        if (
+          targetSectionClass === TARGET_CLASS &&
+          targetSectionId !== sourceSectionId
+        ) {
+          console.log("shouldappe");
+          ev.target.appendChild(todo);
+        }
       }
     </script>
   </head>
@@ -59,18 +91,57 @@
         </div>
       </form>
 
-      <div
-        class="todo-list-container drag-dist"
-        ondrop="drop(event)"
-        ondragover="allowDrop(event)"
-      >
-        <div class="todo-list-header">
-          <h3>To do</h3>
-        </div>
-        <div class="todo-list">
-          <p>No to do items yet!</p>
-        </div>
-      </div>
+      <section class="todo-sections">
+        <section
+          class="todo-list-container drag-dist"
+          id="section1"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
+          <header class="todo-list-header">
+            <h3>To do</h3>
+          </header>
+          <main class="todo-list">
+            <p>No to do items yet!</p>
+          </main>
+        </section>
+
+        <section
+          class="todo-list-container drag-dist"
+          id="section2"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
+          <header class="todo-list-header">
+            <h3>To do</h3>
+          </header>
+          <main class="todo-list"></main>
+        </section>
+
+        <section
+          class="todo-list-container drag-dist"
+          id="section3"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
+          <header class="todo-list-header">
+            <h3>To do</h3>
+          </header>
+          <main class="todo-list"></main>
+        </section>
+
+        <section
+          class="todo-list-container drag-dist"
+          id="section4"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
+          <header class="todo-list-header">
+            <h3>To do</h3>
+          </header>
+          <main class="todo-list"></main>
+        </section>
+      </section>
     </div>
 
     <div>

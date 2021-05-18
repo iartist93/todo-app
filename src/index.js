@@ -9,7 +9,7 @@ const REMOVE_TODO = "REMOVE_TODO";
 const TOGGLE_TODO = "TOGGLE_TODO";
 
 const todoItem = {
-  id: "asteqrt",
+  id: "0",
   title: "Buy chocolate",
   content: "I want really to buy coffe right now 😂",
   completed: true
@@ -123,7 +123,12 @@ form.onsubmit = (e) => {
 };
 
 const drag = (ev) => {
-  ev.dataTransfer.setData("class", ev.target.className);
+  ev.dataTransfer.setData("parentId", ev.target.parentNode.parentNode.id);
+  ev.dataTransfer.setData(
+    "parentClass",
+    ev.target.parentNode.parentNode.classList[0]
+  );
+  ev.dataTransfer.setData("id", ev.target.id); // each todo item has unique id
 };
 
 //-----------------------------------------------------------//
@@ -148,6 +153,7 @@ const onStateUpdate = () => {
 
     // container
     todoContainer.className = "row drag-item";
+    todoContainer.id = `todo-${todoItem.id}`;
     todoContainer.draggable = true;
     todoContainer.ondragstart = (event) => drag(event);
 
