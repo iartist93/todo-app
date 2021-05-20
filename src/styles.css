@@ -236,7 +236,7 @@ body {
 
 .cloned-todo-item-id {
   opacity: 40%;
-  border: 2px dashed black;
+  border: 0.1rem dashed rgb(103, 104, 110);
 }
 
 /* --------------------------------------------------- */

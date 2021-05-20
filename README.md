@@ -40,5 +40,8 @@
 - [ ] Add color coding to each node.
 - [ ] Add filter button, to filter notes based on tag, time or color.
 - [ ] Implement observer pattern for internal state.
+- [ ] analysis the performance of the app.
+- [ ] add dark theme.
+- [ ] Solve parcel issue when build with `--no-minify`, I think It's something related to class or id names.
 
 ---

@@ -3,8 +3,6 @@ const TARGET_CLASS = 'drag-dist';
 const tempDiv = document.querySelector('.temp-div');
 const dragDist = document.querySelectorAll('.drag-dist');
 
-console.log(dragDist);
-
 dragDist.forEach((el) => {
   el.addEventListener('dragover', (e) => allowDrop(e));
   el.addEventListener('drop', (e) => drop(e));
@@ -22,6 +20,7 @@ const state = {
   currentTodoId: null,
   cloneId: 'cloned-todo-item-id',
   alreadyCloned: false,
+  dragEntered: false,
 };
 
 const allowDrop = (ev) => {
@@ -30,15 +29,12 @@ const allowDrop = (ev) => {
 
 const resetUI = () => {
   dragDist.forEach((section) => {
-    // reset the section color
     section.style.backgroundColor = 'white';
   });
   // remove the current clonned todo item if any
-  const currentClonedTodos = Array.from(
-    document.getElementsByClassName(state.cloneId)
-  );
-  if (currentClonedTodos.length) {
-    currentClonedTodos.forEach((todo) => todo.remove());
+  const currentClonedTodo = document.getElementById(state.cloneId);
+  if (currentClonedTodo) {
+    currentClonedTodo.remove();
   }
   state.prevSection = drag.currentSection;
   state.alreadyCloned = false;
@@ -47,32 +43,38 @@ const resetUI = () => {
 
 const handleDragLeave = (ev) => {
   ev.preventDefault();
-  update();
+  state.dragEntered = false;
+  requestAnimationFrame(() => update());
 };
 
 const handleDragEnter = (ev) => {
   ev.preventDefault();
   const section = ev.currentTarget;
+
+  if (state.dragEntered) return;
+
   if (section) {
     state.currentSection = section;
   }
-  update();
+  state.dragEntered = true;
+  requestAnimationFrame(() => update());
 };
 
 const update = () => {
   resetUI();
-  state.currentSection.style.backgroundColor = '#EAEBEE';
+  state.currentSection.style.backgroundColor = '#EBEDF1';
   const todoId = state.currentTodoId;
   tempDiv.innerHTML = state.currentSection.id;
-  if (todoId) {
+  if (todoId && !state.alreadyCloned) {
     const todoItem = document.getElementById(todoId);
     const todoItemClone = todoItem.cloneNode(true);
     todoItemClone.classList.add(state.cloneId);
+    todoItemClone.id = state.cloneId;
     todoItemClone.addEventListener('drop', (e) => drop(e));
+    console.log('Yes todo is there ', state.currentSection.id);
     state.currentSection.appendChild(todoItemClone);
     state.alreadyCloned = true;
   }
-  // console.log('Enter');
 };
 
 const drop = (ev) => {
@@ -100,6 +102,8 @@ const drop = (ev) => {
     ev.currentTarget.appendChild(todo);
   } else if (targetSectionClass.includes(state.cloneId)) {
     console.log('Target is todo node ', targetSectionId);
+    console.log('Target is todo node ', targetSectionClass);
+
     targetSectionId = state.currentSection.id;
     const section = document.getElementById(targetSectionId);
     section.appendChild(todo);
