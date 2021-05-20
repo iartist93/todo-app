@@ -8,9 +8,9 @@ dragDist.forEach((el) => {
   el.addEventListener('drop', (e) => drop(e));
   el.addEventListener('dragenter', (e) => handleDragEnter(e));
   el.addEventListener('dragleave', (e) => handleDragLeave(e));
+  el.addEventListener('dragend', (e) => dragEnd(e));
+  el.addEventListener('dragstart', (e) => dragStart(e));
   // el.addEventListener('click', (event) => console.log('clicked'));
-  // el.addEventListener('dragend', (event) => console.log('drag end'));
-  // el.addEventListener('dragstart', (event) => console.log('drag start'));
 });
 
 // Note : currentSection must always have a reference section
@@ -21,6 +21,7 @@ const state = {
   cloneId: 'cloned-todo-item-id',
   alreadyCloned: false,
   dragEntered: false,
+  dragDropped: false,
 };
 
 const allowDrop = (ev) => {
@@ -43,7 +44,6 @@ const resetUI = () => {
   }
   state.prevSection = drag.currentSection;
   state.alreadyCloned = false;
-  // console.log('Reset');
 };
 
 const handleDragLeave = (ev) => {
@@ -80,7 +80,6 @@ const update = () => {
     console.log('Yes todo is there ', state.currentSection.id);
     state.currentSection.appendChild(todoItemClone);
     state.alreadyCloned = true;
-
     todoItem.style.display = 'none';
   }
 };
@@ -109,17 +108,32 @@ const drop = (ev) => {
   ) {
     ev.currentTarget.appendChild(todo);
   } else if (targetSectionClass.includes(state.cloneId)) {
-    console.log('Target is todo node ', targetSectionId);
-    console.log('Target is todo node ', targetSectionClass);
-
     targetSectionId = state.currentSection.id;
+    const section = document.getElementById(targetSectionId);
+    section.appendChild(todo);
+  }
+
+  state.dragDropped = true;
+};
+
+const dragStart = (ev) => {
+  state.dragDropped = false;
+};
+
+const dragEnd = (ev) => {
+  ev.preventDefault();
+
+  if (!state.dragDropped) {
+    resetUI();
+    const todoId = state.currentTodoId;
+    const todo = document.getElementById(todoId);
+    const targetSectionId = state.currentSection.id;
     const section = document.getElementById(targetSectionId);
     section.appendChild(todo);
   }
 };
 
 const setTodoId = (id) => {
-  console.log('id = ', id);
   if (id) {
     state.currentTodoId = id;
   }
