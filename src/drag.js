@@ -1,3 +1,6 @@
+import { addTodo, updateTodo } from './redux/actions/todo.a';
+import store from './redux/store';
+
 const TARGET_CLASS = 'drag-dist';
 
 const tempDiv = document.querySelector('.temp-div');
@@ -87,33 +90,43 @@ const update = () => {
 const drop = (ev) => {
   ev.preventDefault();
 
-  resetUI();
+  // currenlty clonned todo also handle the drop event
+  // so this function maybe called twice
+  // hance we do a quick check if it's already called or not
+  // TODO: Find a better solution
+  if (!state.dragDropped) {
+    resetUI();
 
-  // get the dragged todo node
-  const todoId = ev.dataTransfer.getData('id');
-  const todo = document.getElementById(todoId);
+    // get the dragged todo node
+    const todoId = ev.dataTransfer.getData('id');
+    const todo = document.getElementById(todoId);
 
-  // get the parent section of the dragged node
-  const sourceSectionId = ev.dataTransfer.getData('parentId');
-  // const sourceSecionClass = ev.dataTransfer.getData('parentClasses');
+    // get the parent section of the dragged node
+    const sourceSectionId = ev.dataTransfer.getData('parentId');
+    // const sourceSecionClass = ev.dataTransfer.getData('parentClasses');
 
-  // check if the target is a section or the clonned todo item
-  let targetSectionId = ev.currentTarget.id;
+    // check if the target is a section or the clonned todo item
+    let targetSectionId = ev.currentTarget.id;
 
-  const targetSectionClass = Array.from(ev.currentTarget.classList);
+    const targetSectionClass = Array.from(ev.currentTarget.classList);
 
-  if (
-    targetSectionClass.includes(TARGET_CLASS) &&
-    targetSectionId !== sourceSectionId
-  ) {
-    ev.currentTarget.appendChild(todo);
-  } else if (targetSectionClass.includes(state.cloneId)) {
-    targetSectionId = state.currentSection.id;
-    const section = document.getElementById(targetSectionId);
-    section.appendChild(todo);
+    console.log(targetSectionClass, targetSectionId, sourceSectionId);
+
+    if (
+      targetSectionClass.includes(TARGET_CLASS) &&
+      targetSectionId !== sourceSectionId
+    ) {
+      ev.currentTarget.appendChild(todo);
+    } else if (targetSectionClass.includes(state.cloneId)) {
+      targetSectionId = state.currentSection.id;
+      const section = document.getElementById(targetSectionId);
+      section.appendChild(todo);
+    }
+
+    state.dragDropped = true;
+    console.log('drag drop');
+    updateTodoState();
   }
-
-  state.dragDropped = true;
 };
 
 const dragStart = (ev) => {
@@ -124,12 +137,14 @@ const dragEnd = (ev) => {
   ev.preventDefault();
 
   if (!state.dragDropped) {
+    console.log('drag end');
     resetUI();
     const todoId = state.currentTodoId;
     const todo = document.getElementById(todoId);
     const targetSectionId = state.currentSection.id;
     const section = document.getElementById(targetSectionId);
     section.appendChild(todo);
+    updateTodoState();
   }
 };
 
@@ -141,19 +156,29 @@ const setTodoId = (id) => {
 
 export const drag = (ev) => {
   // set the parent section id
-  ev.dataTransfer.setData(
-    'parentId',
-    ev.currentTarget.parentNode.parentNode.id
-  );
+  ev.dataTransfer.setData('parentId', ev.currentTarget.parentNode.id);
 
   // set the parent section classes
   ev.dataTransfer.setData(
     'parentClasses',
-    Array.from(ev.currentTarget.parentNode.parentNode.classList)
+    Array.from(ev.currentTarget.parentNode.classList)
   );
 
   // set the current note id
   ev.dataTransfer.setData('id', ev.currentTarget.id); // each todo item has unique id
 
   setTodoId(ev.currentTarget.id);
+};
+
+const updateTodoState = () => {
+  const todoId = state.currentTodoId;
+  const todo = store
+    .getState()
+    .todoItems.filter((item) => item.id === todoId)[0];
+  const currentShelf = state.currentSection.id;
+  todo.shelf = currentShelf;
+  console.log(currentShelf);
+  console.log(todo);
+
+  store.dispatch(updateTodo(todoId, todo));
 };

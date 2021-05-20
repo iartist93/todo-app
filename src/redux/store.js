@@ -6,10 +6,16 @@ const todoItem = {
   title: 'Buy chocolate',
   content: 'I want really to buy coffe right now 😂',
   completed: true,
-  timestamp: new Date()
+  timestamp: new Date(),
+  shelf: 'shelf1',
 };
 
 export const initialState = { todoItems: [todoItem] };
 
-const store = createStore(todoReducer, initialState);
+const createTempStore = () => {
+  console.log('Creating Store');
+  return createStore(todoReducer, initialState);
+};
+
+const store = createTempStore();
 export default store;

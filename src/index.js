@@ -11,7 +11,7 @@ store.subscribe(() => onStateUpdate());
 // document queries
 
 const form = document.querySelector('.todo-form');
-const todoListElement = document.querySelector('.todo-list');
+const todoShelves = document.querySelectorAll('.todo-list');
 const todoTextInput = document.querySelector('.todo-input-title');
 const todoTextContent = document.querySelector('.todo-input-content');
 const todoCompletedInput = document.querySelector('#input-completed-checkbox');
@@ -39,11 +39,12 @@ form.onsubmit = (e) => {
 
   // Build a new todo object, don't forget to append an ID
   const newTodo = {
-    id: new Date().getTime(),
+    id: new Date().getTime().toString(),
     title: todoTextInput.value,
     content: todoTextContent.value,
     completed: todoCompletedInput.checked,
     timestamp: new Date(),
+    shelf: 'shelf1',
   };
 
   // Dispatch an action to add a new todo
@@ -60,59 +61,67 @@ const onStateUpdate = () => {
   const { todoItems } = store.getState();
 
   // clear the current UI list
-  todoListElement.innerHTML = '';
+  todoShelves.forEach((shelf) => (shelf.innerHTML = ''));
 
-  todoItems.forEach((todoItem) => {
-    // const todoListItem = document.createElement("li");
-    const todoContainer = document.createElement('div');
-    const todoHeader = document.createElement('div');
-    const todoActions = document.createElement('div');
-    const todoCheckbox = document.createElement('input');
-    const todoTitle = document.createElement('p');
-    const todoContent = document.createElement('p');
-    const todoDelete = document.createElement('button');
+  todoItems
+    .sort((a, b) => b.timestamp - a.timestamp)
+    .forEach((todoItem) => {
+      // const todoListItem = document.createElement("li");
+      const todoContainer = document.createElement('div');
+      const todoHeader = document.createElement('div');
+      const todoActions = document.createElement('div');
+      const todoCheckbox = document.createElement('input');
+      const todoTitle = document.createElement('p');
+      const todoContent = document.createElement('p');
+      const todoDelete = document.createElement('button');
 
-    // container
-    todoContainer.className = 'todo drag-item';
-    todoContainer.id = `todo-${todoItem.id}`;
-    todoContainer.draggable = true;
-    todoContainer.ondragstart = (event) => drag(event);
+      // container
+      todoContainer.className = 'todo drag-item';
+      todoContainer.id = todoItem.id;
+      todoContainer.draggable = true;
+      todoContainer.ondragstart = (event) => drag(event);
 
-    // header
-    todoHeader.className = 'todo-header';
+      // header
+      todoHeader.className = 'todo-header';
 
-    // actions
-    todoActions.className = 'todo-actions';
+      // actions
+      todoActions.className = 'todo-actions';
 
-    // title
-    todoTitle.innerHTML = todoItem.title;
-    todoTitle.className = 'todo-title';
+      // title
+      todoTitle.innerHTML = todoItem.title;
+      todoTitle.className = 'todo-title';
 
-    // content
-    todoContent.innerHTML = todoItem.content;
-    todoContent.className = 'todo-content';
+      // content
+      todoContent.innerHTML = todoItem.content;
+      todoContent.className = 'todo-content';
 
-    // checkbox completed
-    todoCheckbox.className = 'todo-checkbox';
-    todoCheckbox.type = 'checkbox';
-    todoCheckbox.checked = todoItem.completed;
-    todoCheckbox.onchange = () => {
-      store.dispatch(toggleTodo(todoItem.id));
-    };
+      // checkbox completed
+      todoCheckbox.className = 'todo-checkbox';
+      todoCheckbox.type = 'checkbox';
+      todoCheckbox.checked = todoItem.completed;
+      todoCheckbox.onchange = () => {
+        store.dispatch(toggleTodo(todoItem.id));
+      };
 
-    // delete button
-    todoDelete.className = 'todo-delete';
-    todoDelete.textContent = '✖';
-    todoDelete.onclick = () => {
-      store.dispatch(removeTodo(todoItem.id));
-    };
+      // delete button
+      todoDelete.className = 'todo-delete';
+      todoDelete.textContent = '✖';
+      todoDelete.onclick = () => {
+        store.dispatch(removeTodo(todoItem.id));
+      };
 
-    // UI builder
-    todoActions.append(todoCheckbox, todoDelete);
-    todoHeader.append(todoTitle, todoActions);
-    todoContainer.append(todoHeader, todoContent);
-    todoListElement.appendChild(todoContainer);
-  });
+      // UI builder
+      todoActions.append(todoCheckbox, todoDelete);
+      todoHeader.append(todoTitle, todoActions);
+      todoContainer.append(todoHeader, todoContent);
+
+      todoShelves.forEach((shelf) => {
+        if (shelf.id === todoItem.shelf) {
+          console.log(todoItem.shelf);
+          shelf.appendChild(todoContainer);
+        }
+      });
+    });
 };
 
 //-----------------------------------------------------------//
