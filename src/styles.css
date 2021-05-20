@@ -234,6 +234,11 @@ body {
   margin-right: 10px;
 }
 
+.cloned-todo-item-id {
+  opacity: 40%;
+  border: 2px dashed black;
+}
+
 /* --------------------------------------------------- */
 /* Add new todo modal */
 

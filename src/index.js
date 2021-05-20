@@ -1,4 +1,4 @@
-import { drag, allowDrop, drop } from './drag';
+import { drag } from './drag';
 import store from './redux/store';
 import { addTodo, removeTodo, toggleTodo } from './redux/actions/todo.a';
 
@@ -148,4 +148,3 @@ const state = {
 onStateUpdate();
 
 //-----------------------------------------------------------//
-export { drag, allowDrop, drop };
