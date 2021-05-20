@@ -1,5 +1,6 @@
 // import { createStore, combineReducers } from "./MyRedux";
-import { createStore, combineReducers } from 'redux';
+import { createStore } from 'redux';
+import { drag, allowDrop, drop } from './drag';
 
 //-----------------------------------------------------------//
 // Actions
@@ -140,15 +141,6 @@ form.onsubmit = (e) => {
   todoTextContent.value = '';
 };
 
-const drag = (ev) => {
-  ev.dataTransfer.setData('parentId', ev.target.parentNode.parentNode.id);
-  ev.dataTransfer.setData(
-    'parentClass',
-    ev.target.parentNode.parentNode.classList[0]
-  );
-  ev.dataTransfer.setData('id', ev.target.id); // each todo item has unique id
-};
-
 //-----------------------------------------------------------//
 // UI builder
 
@@ -216,6 +208,7 @@ const onStateUpdate = () => {
 
 // Temp reference
 
+/*
 const state = {
   todoItems: [
     {
@@ -236,7 +229,9 @@ const state = {
   ]
 };
 
+*/
 //-----------------------------------------------------------//
 onStateUpdate();
 
 //-----------------------------------------------------------//
+export { drag, allowDrop, drop };

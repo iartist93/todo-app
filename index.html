@@ -9,33 +9,6 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
       rel="stylesheet"
     />
-    <script>
-      const TARGET_CLASS = 'todo-list-container';
-
-      function allowDrop(ev) {
-        ev.preventDefault();
-      }
-
-      function drop(ev) {
-        ev.preventDefault();
-        const todoId = ev.dataTransfer.getData('id');
-        const todo = document.getElementById(todoId);
-
-        const sourceSectionId = ev.dataTransfer.getData('parentId');
-        const sourceSecionClass = ev.dataTransfer.getData('parentClass');
-
-        const targetSectionClass = ev.target.classList[0];
-        const targetSectionId = ev.target.id;
-
-        if (
-          targetSectionClass === TARGET_CLASS &&
-          targetSectionId !== sourceSectionId
-        ) {
-          console.log('shouldappe');
-          ev.target.appendChild(todo);
-        }
-      }
-    </script>
   </head>
 
   <body>
@@ -100,12 +73,7 @@
       <!--------------------- sections ----------------------------->
 
       <section class="todo-sections">
-        <section
-          class="todo-list-container drag-dist"
-          id="section1"
-          ondrop="drop(event)"
-          ondragover="allowDrop(event)"
-        >
+        <section class="todo-list-container drag-dist" id="section1">
           <header class="todo-list-header">
             <h3>To do</h3>
           </header>
@@ -114,36 +82,21 @@
           </main>
         </section>
 
-        <section
-          class="todo-list-container drag-dist"
-          id="section2"
-          ondrop="drop(event)"
-          ondragover="allowDrop(event)"
-        >
+        <section class="todo-list-container drag-dist" id="section2">
           <header class="todo-list-header">
             <h3>In Progress</h3>
           </header>
           <main class="todo-list"></main>
         </section>
 
-        <section
-          class="todo-list-container drag-dist"
-          id="section3"
-          ondrop="drop(event)"
-          ondragover="allowDrop(event)"
-        >
+        <section class="todo-list-container drag-dist" id="section3">
           <header class="todo-list-header">
             <h3>Review</h3>
           </header>
           <main class="todo-list"></main>
         </section>
 
-        <section
-          class="todo-list-container drag-dist"
-          id="section4"
-          ondrop="drop(event)"
-          ondragover="allowDrop(event)"
-        >
+        <section class="todo-list-container drag-dist" id="section4">
           <header class="todo-list-header">
             <h3>Done</h3>
           </header>
@@ -159,7 +112,7 @@
         </p>
       </div>
     </div>
-
+    <script src="./src/drag.js"></script>
     <script src="src/index.js"></script>
   </body>
 </html>
