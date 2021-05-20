@@ -41,7 +41,6 @@
 - [ ] Add filter button, to filter notes based on tag, time or color.
 
 ---
-
 ## Parcel Configuraion
 
 - Webpack, highly configurable and customizable.
