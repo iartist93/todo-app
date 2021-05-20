@@ -22,19 +22,22 @@
 
 ## TODO List 😂😂
 
-- [x] button hover/focus heightlights.
-- [x] add new todo should be popup model.
-- [x] have 4 sectios "todo" "in-progress" "review" "done"
-- [x] user can drag/drop item
-- [ ] filter each section to read it's slice from state only
+- [x] Button hover/focus heightlights.
+- [x] Add new todo should be popup model.
+- [x] Have 4 sectios "todo" "in-progress" "review" "done"
+- [x] User can drag/drop item
+- [ ] Filter each section to read it's slice from state only
 - [ ] check the distination element for class "drag-dist", search the parents for class name and add the note to the section if the parent is "drag-dist"
-- [ ] make app responsive.
-- [ ] upate the to-do state to reflect the current shelf.
-- [ ] add color coding to each node.
-- [ ] add option to edit the note
-- [ ] add my redux-implementation to the project.
-- [ ] implement the search funcionality
-- [ ] add filter action future feature.
-- [ ] add timestamp to the state.
+- [ ] Make app responsive on web.
+- [ ] Enhance the mobile experience.
+- [ ] Update the todo state to reflect the current shelf.
+- [ ] Add option to edit the note.
+- [ ] Add my redux-implementation to the project.
+- [ ] Implement search bar funcionality.
+  - [ ] Filter the notes inside each seaction.
+  - [ ] Clear the search field after submit.
+- [ ] Add timestamp to the state.
+- [ ] Add color coding to each node.
+- [ ] Add filter button, to filter notes based on tag, time or color.
 
 ---

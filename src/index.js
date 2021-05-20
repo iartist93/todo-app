@@ -1,17 +1,17 @@
 // import { createStore, combineReducers } from "./MyRedux";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers } from 'redux';
 
 //-----------------------------------------------------------//
 // Actions
 
-const ADD_TODO = "ADD_TODO";
-const REMOVE_TODO = "REMOVE_TODO";
-const TOGGLE_TODO = "TOGGLE_TODO";
+const ADD_TODO = 'ADD_TODO';
+const REMOVE_TODO = 'REMOVE_TODO';
+const TOGGLE_TODO = 'TOGGLE_TODO';
 
 const todoItem = {
-  id: "0",
-  title: "Buy chocolate",
-  content: "I want really to buy coffe right now 😂",
+  id: '0',
+  title: 'Buy chocolate',
+  content: 'I want really to buy coffe right now 😂',
   completed: true
 };
 
@@ -94,25 +94,25 @@ subscribe(() => onStateUpdate());
 //-----------------------------------------------------------//
 // UI quries
 
-const form = document.querySelector(".todo-form");
-const todoListElement = document.querySelector(".todo-list");
-const todoTextInput = document.querySelector(".todo-input-title");
-const todoTextContent = document.querySelector(".todo-input-content");
-const todoCompletedInput = document.querySelector("#input-completed-checkbox");
+const form = document.querySelector('.todo-form');
+const todoListElement = document.querySelector('.todo-list');
+const todoTextInput = document.querySelector('.todo-input-title');
+const todoTextContent = document.querySelector('.todo-input-content');
+const todoCompletedInput = document.querySelector('#input-completed-checkbox');
 
-const modalContainer = document.querySelector(".modal-container");
-const addNewButton = document.querySelector("#add-new-btn");
+const modalContainer = document.querySelector('.modal-container');
+const addNewButton = document.querySelector('#add-new-btn');
 
 //-----------------------------------------------------------//
 // Modal Events
 
 addNewButton.onclick = (event) => {
-  modalContainer.style.display = "flex";
+  modalContainer.style.display = 'flex';
 };
 
 window.onclick = (event) => {
   if (event.target === modalContainer) {
-    modalContainer.style.display = "none";
+    modalContainer.style.display = 'none';
   }
 };
 
@@ -136,17 +136,17 @@ form.onsubmit = (e) => {
 
   // Dispatch an action to add a new todo
   dispatch(addTodo(newTodo));
-  todoTextInput.value = "";
-  todoTextContent.value = "";
+  todoTextInput.value = '';
+  todoTextContent.value = '';
 };
 
 const drag = (ev) => {
-  ev.dataTransfer.setData("parentId", ev.target.parentNode.parentNode.id);
+  ev.dataTransfer.setData('parentId', ev.target.parentNode.parentNode.id);
   ev.dataTransfer.setData(
-    "parentClass",
+    'parentClass',
     ev.target.parentNode.parentNode.classList[0]
   );
-  ev.dataTransfer.setData("id", ev.target.id); // each todo item has unique id
+  ev.dataTransfer.setData('id', ev.target.id); // each todo item has unique id
 };
 
 //-----------------------------------------------------------//
@@ -157,49 +157,49 @@ const onStateUpdate = () => {
   const { todoItems } = getState();
 
   // clear the current UI list
-  todoListElement.innerHTML = "";
+  todoListElement.innerHTML = '';
 
   todoItems.forEach((todoItem) => {
     // const todoListItem = document.createElement("li");
-    const todoContainer = document.createElement("div");
-    const todoHeader = document.createElement("div");
-    const todoActions = document.createElement("div");
-    const todoCheckbox = document.createElement("input");
-    const todoTitle = document.createElement("p");
-    const todoContent = document.createElement("p");
-    const todoDelete = document.createElement("button");
+    const todoContainer = document.createElement('div');
+    const todoHeader = document.createElement('div');
+    const todoActions = document.createElement('div');
+    const todoCheckbox = document.createElement('input');
+    const todoTitle = document.createElement('p');
+    const todoContent = document.createElement('p');
+    const todoDelete = document.createElement('button');
 
     // container
-    todoContainer.className = "row drag-item";
+    todoContainer.className = 'todo drag-item';
     todoContainer.id = `todo-${todoItem.id}`;
     todoContainer.draggable = true;
     todoContainer.ondragstart = (event) => drag(event);
 
     // header
-    todoHeader.className = "todo-header";
+    todoHeader.className = 'todo-header';
 
     // actions
-    todoActions.className = "todo-actions";
+    todoActions.className = 'todo-actions';
 
     // title
     todoTitle.innerHTML = todoItem.title;
-    todoTitle.className = "todo-title";
+    todoTitle.className = 'todo-title';
 
     // content
     todoContent.innerHTML = todoItem.content;
-    todoContent.className = "todo-content";
+    todoContent.className = 'todo-content';
 
     // checkbox completed
-    todoCheckbox.className = "todo-checkbox";
-    todoCheckbox.type = "checkbox";
+    todoCheckbox.className = 'todo-checkbox';
+    todoCheckbox.type = 'checkbox';
     todoCheckbox.checked = todoItem.completed;
     todoCheckbox.onchange = () => {
       dispatch(toggleTodo(todoItem.id));
     };
 
     // button delete
-    todoDelete.className = "todo-delete";
-    todoDelete.textContent = "✖";
+    todoDelete.className = 'todo-delete';
+    todoDelete.textContent = '✖';
     todoDelete.onclick = () => {
       dispatch(removeTodo(todoItem.id));
     };
@@ -220,17 +220,17 @@ const state = {
   todoItems: [
     {
       id: 0,
-      text: "todo 1",
+      text: 'todo 1',
       completed: false
     },
     {
       id: 1,
-      text: "todo 2",
+      text: 'todo 2',
       completed: false
     },
     {
       id: 2,
-      text: "todo 3",
+      text: 'todo 3',
       completed: false
     }
   ]

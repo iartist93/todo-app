@@ -10,7 +10,7 @@
       rel="stylesheet"
     />
     <script>
-      const TARGET_CLASS = "todo-list-container";
+      const TARGET_CLASS = 'todo-list-container';
 
       function allowDrop(ev) {
         ev.preventDefault();
@@ -18,11 +18,11 @@
 
       function drop(ev) {
         ev.preventDefault();
-        const todoId = ev.dataTransfer.getData("id");
+        const todoId = ev.dataTransfer.getData('id');
         const todo = document.getElementById(todoId);
 
-        const sourceSectionId = ev.dataTransfer.getData("parentId");
-        const sourceSecionClass = ev.dataTransfer.getData("parentClass");
+        const sourceSectionId = ev.dataTransfer.getData('parentId');
+        const sourceSecionClass = ev.dataTransfer.getData('parentClass');
 
         const targetSectionClass = ev.target.classList[0];
         const targetSectionId = ev.target.id;
@@ -31,7 +31,7 @@
           targetSectionClass === TARGET_CLASS &&
           targetSectionId !== sourceSectionId
         ) {
-          console.log("shouldappe");
+          console.log('shouldappe');
           ev.target.appendChild(todo);
         }
       }
@@ -40,14 +40,20 @@
 
   <body>
     <div class="container">
-      <h1>Awesome Todo App</h1>
+      <!-- <h1>Awesome Todo App</h1> -->
 
-      <!-------------------- Modal ----------------------------->
-      <div class="actions">
-        <input class="search-todos" placeholder="Search todos..." />
-        <button id="add-new-btn" class="round-button" onclick="this.blur();">
-          + New Item
-        </button>
+      <!-------------------- Navbar ----------------------------->
+      <div class="navbar">
+        <div class="row">
+          <img src="./src/icons/logo3.png" alt="logo" class="logo" />
+          <h3 class="logo-title">Todo</h3>
+        </div>
+        <div>
+          <input class="search-todos" placeholder="Search todos..." />
+          <button id="add-new-btn" class="round-button" onclick="this.blur();">
+            + New Todo
+          </button>
+        </div>
       </div>
 
       <!------------------------ Add Form ---------------------------->
@@ -63,7 +69,7 @@
             />
             <textarea
               class="todo-input-content"
-              placeholder="What's in your mind?"
+              placeholder="optional... What's in your mind?"
               value="test"
             ></textarea>
             <div class="todo-input-footer">
@@ -145,7 +151,13 @@
         </section>
       </section>
 
-      <!----------------------------------------------------------->
+      <!------------------------- Footer -------------------------->
+      <div class="footer">
+        <p>
+          Made with 💙 by Ahmad Ayman
+          <a href="https://github.com/iartist93">@iartist93</a>
+        </p>
+      </div>
     </div>
 
     <script src="src/index.js"></script>
