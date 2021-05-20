@@ -28,6 +28,11 @@ const allowDrop = (ev) => {
 };
 
 const resetUI = () => {
+  //TODO: Refactor this
+  const todoId = state.currentTodoId;
+  const todoItem = document.getElementById(todoId);
+  todoItem.style.display = 'flex';
+
   dragDist.forEach((section) => {
     section.style.backgroundColor = 'white';
   });
@@ -64,6 +69,7 @@ const update = () => {
   resetUI();
   // state.currentSection.style.backgroundColor = '#EBEDF1';
   const todoId = state.currentTodoId;
+
   tempDiv.innerHTML = state.currentSection.id;
   if (todoId && !state.alreadyCloned) {
     const todoItem = document.getElementById(todoId);
@@ -74,6 +80,8 @@ const update = () => {
     console.log('Yes todo is there ', state.currentSection.id);
     state.currentSection.appendChild(todoItemClone);
     state.alreadyCloned = true;
+
+    todoItem.style.display = 'none';
   }
 };
 
