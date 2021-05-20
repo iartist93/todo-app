@@ -34,7 +34,7 @@ const resetUI = () => {
   todoItem.style.display = 'flex';
 
   dragDist.forEach((section) => {
-    section.style.backgroundColor = 'white';
+    section.style.backgroundColor = 'rgb(248, 250, 251)';
   });
   // remove the current clonned todo item if any
   const currentClonedTodo = document.getElementById(state.cloneId);

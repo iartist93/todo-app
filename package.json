@@ -1,7 +1,12 @@
 {
-  "name": "todos-vanilla-redux-starter",
+  "name": "todo-app",
+  "author": {
+    "email": "mongez.me@gmail.com",
+    "name": "Ahmad Ayman",
+    "url": "https://github.com/iartist93"
+  },
   "version": "1.0.0",
-  "description": "",
+  "description": "Todo app using vanilla-js and custom redux implementation",
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
