@@ -62,7 +62,7 @@ const handleDragEnter = (ev) => {
 
 const update = () => {
   resetUI();
-  state.currentSection.style.backgroundColor = '#EBEDF1';
+  // state.currentSection.style.backgroundColor = '#EBEDF1';
   const todoId = state.currentTodoId;
   tempDiv.innerHTML = state.currentSection.id;
   if (todoId && !state.alreadyCloned) {

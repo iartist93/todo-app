@@ -7,6 +7,8 @@
 
 ## Live Preview
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3520050d-b577-4381-b9e5-d02151e3ee0f/deploy-status)](https://app.netlify.com/sites/oknext/deploys)
+
 - https://oknext.netlify.app/
 
 ---
