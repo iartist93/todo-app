@@ -43,7 +43,7 @@ form.onsubmit = (e) => {
     title: todoTextInput.value,
     content: todoTextContent.value,
     completed: todoCompletedInput.checked,
-    timestamp: new Date()
+    timestamp: new Date(),
   };
 
   // Dispatch an action to add a new todo
