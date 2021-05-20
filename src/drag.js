@@ -39,6 +39,11 @@ dragDist.forEach((el) => {
   el.addEventListener('dragover', (event) => allowDrop(event));
   el.addEventListener('click', (event) => console.log('clicked'));
   el.addEventListener('drop', (event) => drop(event));
+
+  el.addEventListener('dragend', (event) => console.log('drag end'));
+  el.addEventListener('dragstart', (event) => console.log('drag start'));
+  el.addEventListener('dragenter', (event) => console.log('drag enter'));
+  el.addEventListener('dragleave', (event) => console.log('drag leave'));
 });
 
 console.log('executed in drag.js');
