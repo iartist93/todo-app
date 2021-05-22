@@ -1,10 +1,9 @@
 const thunk = (store) => (next) => async (action) => {
-  console.log('Thunk ==> ', action, action.type);
   if (typeof action === 'function') {
-    const result = await action(store.dispatch);
-    return;
+    return await action(store.dispatch);
+  } else {
+    return next(action);
   }
-  next(action);
 };
 
 export default thunk;

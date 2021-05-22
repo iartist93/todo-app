@@ -7,6 +7,7 @@
  */
 export const createStore = (reducer, predefinedState, enhancer) => {
   if (enhancer && typeof enhancer === 'function') {
+    console.log('Apply Enhancer');
     return enhancer(createStore)(reducer, predefinedState);
   }
 
@@ -100,15 +101,18 @@ export const compose = (...funcs) => {
 
 export const applyMiddlewares = (...middlewares) => {
   // remember the middlewares
-  return (createStore) => (reducer, predefinedState) => {
-    const store = createStore(reducer, predefinedState);
+  return (createStore) => (reducer, predefinedState, enhancer) => {
+    const store = createStore(reducer, predefinedState, enhancer);
 
+    let dispatch = store.dispatch;
+
+    // store the final modified dispatch function.
     const newStore = {
       getState: store.getState,
-      dispatch: (action) => store.dispatch(action),
+      dispatch: (action) => dispatch(action),
     };
 
-    // pass the first argument to the middlewares `store`
+    // pass the first argument (store) to the middlewares
     const chain = middlewares.map((middleware) => middleware(newStore));
 
     // apply all the middlwares
@@ -120,9 +124,9 @@ export const applyMiddlewares = (...middlewares) => {
     // and then the returned result will passed to the pre-last one
     // and so one
 
-    // when we call new_dispatch(action)
+    // when we call the new dispatch(action)
     // those middlwares will be executed from left to right
-    const dispatch = compose(...chain)(store.dispatch);
+    dispatch = compose(...chain)(store.dispatch);
 
     // return the new store with altered dispatch
     return {

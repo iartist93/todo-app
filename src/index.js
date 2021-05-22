@@ -50,8 +50,8 @@ form.onsubmit = (e) => {
     title: todoTextInput.value,
     content: todoTextContent.value,
     completed: todoCompletedInput.checked,
-    timestamp: new Date(),
-    shelf: 'shelf1',
+    timestamp: new Date().getTime(),
+    shelf: todoCompletedInput.checked ? 'shelf4' : 'shelf1',
   };
 
   // Dispatch an action to add a new todo
@@ -71,7 +71,7 @@ const onStateUpdate = () => {
   todoShelves.forEach((shelf) => (shelf.innerHTML = ''));
 
   todoItems
-    .sort((a, b) => b.timestamp - a.timestamp)
+    .sort((b, a) => a.timestamp - b.timestamp)
     .forEach((todoItem) => {
       // const todoListItem = document.createElement("li");
       const todoContainer = document.createElement('div');

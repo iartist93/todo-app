@@ -7,7 +7,7 @@ const todoItem = {
   title: 'Buy chocolate',
   content: 'I want really to buy coffe right now 😂',
   completed: true,
-  timestamp: new Date(),
+  timestamp: new Date().getTime(),
   shelf: 'shelf1',
 };
 

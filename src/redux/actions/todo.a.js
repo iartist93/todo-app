@@ -60,9 +60,8 @@ export const handleRecieveTodos = () => {
 
 export const handleAddTodo = (todo) => {
   return async (dispatch) => {
-    console.log('dispatch ', dispatch);
     await API.addTodo(todo);
-    dispatch(addTodo(todo));
+    return dispatch(addTodo(todo));
   };
 };
 
@@ -80,7 +79,6 @@ export const handleToggleTodo = (id) => {
 
 export const handleUpdateTodo = (id, todo) => {
   return async (dispatch) => {
-    console.log('update dispatch ', dispatch);
     await API.updateTodo(id, todo);
     const result = dispatch(updateTodo(id, todo));
     console.log(result);

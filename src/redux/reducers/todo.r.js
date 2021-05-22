@@ -8,8 +8,6 @@ import {
 import { initialState } from '../store';
 
 export default function reducer(state = initialState, action) {
-  console.log('reducer ', action);
-
   switch (action.type) {
     case RECIEVE_TODOS:
       return [...state, ...action.todos];

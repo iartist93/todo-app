@@ -3,7 +3,7 @@ import store from './redux/store';
 
 const TARGET_CLASS = 'drag-dist';
 
-const tempDiv = document.querySelector('.temp-div');
+// const tempDiv = document.querySelector('.temp-div');
 const dragDist = document.querySelectorAll('.drag-dist');
 
 dragDist.forEach((el) => {
@@ -73,7 +73,7 @@ const update = () => {
   // state.currentSection.style.backgroundColor = '#EBEDF1';
   const todoId = state.currentTodoId;
 
-  tempDiv.innerHTML = state.currentSection.id;
+  // tempDiv.innerHTML = state.currentSection.id;
   if (todoId && !state.alreadyCloned) {
     const todoItem = document.getElementById(todoId);
     const todoItemClone = todoItem.cloneNode(true);

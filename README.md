@@ -52,5 +52,6 @@ https://oknext.netlify.app
 - [ ] Solve parcel issue when build with `--no-minify`, I think It's something related to class or id names.
 - [ ] Decide what databse solution to use for online presistance.
 - [ ] Ad animation to todo item when dragged, e.g. rotate, based on the drag speed.
+- [ ] Deleted todo move to trash first.
 
 ---
