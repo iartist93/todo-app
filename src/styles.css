@@ -11,6 +11,8 @@ body {
 
 body {
   background-color: rgb(250, 250, 250);
+  width: 100%;
+  overflow-y: scroll; /* make the scrollbar always visible to avoid pushing left issue */
 }
 
 .round-button {
@@ -110,6 +112,7 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  width: 100%;
 }
 
 .todo-list-container {
