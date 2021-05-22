@@ -117,7 +117,6 @@ const onStateUpdate = () => {
 
       todoShelves.forEach((shelf) => {
         if (shelf.id === todoItem.shelf) {
-          console.log(todoItem.shelf);
           shelf.appendChild(todoContainer);
         }
       });

@@ -1,5 +1,6 @@
 import { createStore } from './redux';
 import todoReducer from './reducers/todo.r';
+import middlewares from './middlewares/index';
 
 const todoItem = {
   id: '0',
@@ -12,10 +13,5 @@ const todoItem = {
 
 export const initialState = { todoItems: [todoItem] };
 
-const createTempStore = () => {
-  console.log('Creating Store');
-  return createStore(todoReducer, initialState);
-};
-
-const store = createTempStore();
+const store = createStore(todoReducer, initialState, middlewares);
 export default store;

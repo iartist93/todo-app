@@ -80,7 +80,7 @@ const update = () => {
     todoItemClone.classList.add(state.cloneId);
     todoItemClone.id = state.cloneId;
     todoItemClone.addEventListener('drop', (e) => drop(e));
-    console.log('Yes todo is there ', state.currentSection.id);
+    // console.log('Yes todo is there ', state.currentSection.id);
     state.currentSection.appendChild(todoItemClone);
     state.alreadyCloned = true;
     todoItem.style.display = 'none';
@@ -110,8 +110,6 @@ const drop = (ev) => {
 
     const targetSectionClass = Array.from(ev.currentTarget.classList);
 
-    console.log(targetSectionClass, targetSectionId, sourceSectionId);
-
     if (
       targetSectionClass.includes(TARGET_CLASS) &&
       targetSectionId !== sourceSectionId
@@ -124,7 +122,6 @@ const drop = (ev) => {
     }
 
     state.dragDropped = true;
-    console.log('drag drop');
     updateTodoState();
   }
 };
@@ -137,7 +134,6 @@ const dragEnd = (ev) => {
   ev.preventDefault();
 
   if (!state.dragDropped) {
-    console.log('drag end');
     resetUI();
     const todoId = state.currentTodoId;
     const todo = document.getElementById(todoId);
@@ -177,8 +173,6 @@ const updateTodoState = () => {
     .todoItems.filter((item) => item.id === todoId)[0];
   const currentShelf = state.currentSection.id;
   todo.shelf = currentShelf;
-  console.log(currentShelf);
-  console.log(todo);
 
   store.dispatch(updateTodo(todoId, todo));
 };

@@ -100,8 +100,8 @@ export const compose = (...funcs) => {
 
 export const applyMiddlewares = (...middlewares) => {
   // remember the middlewares
-  return (createStore) => (reducer, enhancer) => {
-    const store = createStore(reducer, enhancer);
+  return (createStore) => (reducer, predefinedState) => {
+    const store = createStore(reducer, predefinedState);
 
     const newStore = {
       getState: store.getState,
@@ -122,7 +122,9 @@ export const applyMiddlewares = (...middlewares) => {
 
     // when we call new_dispatch(action)
     // those middlwares will be executed from left to right
-    dispatch = compose(...chain)(store.dispatch);
+    const dispatch = compose(...chain)(store.dispatch);
+
+    console.log(typeof dispatch);
 
     // return the new store with altered dispatch
     return {
