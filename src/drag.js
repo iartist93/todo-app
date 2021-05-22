@@ -1,4 +1,4 @@
-import { addTodo, updateTodo } from './redux/actions/todo.a';
+import { handleUpdateTodo } from './redux/actions/todo.a';
 import store from './redux/store';
 
 const TARGET_CLASS = 'drag-dist';
@@ -168,11 +168,9 @@ export const drag = (ev) => {
 
 const updateTodoState = () => {
   const todoId = state.currentTodoId;
-  const todo = store
-    .getState()
-    .todoItems.filter((item) => item.id === todoId)[0];
+  const todo = store.getState().filter((item) => item.id === todoId)[0];
   const currentShelf = state.currentSection.id;
   todo.shelf = currentShelf;
 
-  store.dispatch(updateTodo(todoId, todo));
+  store.dispatch(handleUpdateTodo(todoId, todo));
 };

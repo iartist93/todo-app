@@ -9,7 +9,7 @@
   "description": "Todo app using vanilla-js and custom redux implementation",
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html --open",
+    "start": "parcel index.html --open --no-source-maps",
     "build": "parcel build index.html",
     "dev": "cross-env NODE_ENV=production parcel build index.html --no-minify",
     "test": "npm run dev && cd ./dist && parcel index.html"

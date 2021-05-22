@@ -1,7 +1,7 @@
-const logger = (store) => (dispatch) => (action) => {
+const logger = (store) => (next) => (action) => {
   console.log('logger:state ', store.getState());
   console.log('logger:action ', action);
-  dispatch(action);
+  next(action);
 };
 
 export default logger;

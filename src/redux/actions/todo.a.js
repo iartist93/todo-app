@@ -51,35 +51,38 @@ export const updateTodo = (id, todo) => {
 //----------------------------------------------------
 // Thunks
 
-// const handleRecieveTodos = () => {
-//   return async (dispatch) => {
-//     const todos = await API.getState();
-//     recieveTodos(todos);
-//   };
-// };
+export const handleRecieveTodos = () => {
+  return async (dispatch) => {
+    const todos = await API.getState();
+    dispatch(recieveTodos(todos));
+  };
+};
 
-// const handleAddTodo = (todo) => {
-//   return async (dispatch) => {
-//     await API.addTodo(todo);
-//     dispatch(addTodo(todo));
-//   };
-// };
+export const handleAddTodo = (todo) => {
+  return async (dispatch) => {
+    console.log('dispatch ', dispatch);
+    await API.addTodo(todo);
+    dispatch(addTodo(todo));
+  };
+};
 
-// const handleRemoveTodo = (id) => {
-//   return async (dispatch) => {
-//     await API.removeTodo(id);
-//     dispatch(removeTodo(id));
-//   };
-// };
+export const handleRemoveTodo = (id) => {
+  return async (dispatch) => {
+    await API.removeTodo(id);
+    dispatch(removeTodo(id));
+  };
+};
 
-// //TODO:: Implement this
-// const handleToggleTodo = (id) => {
-//   return async (dispatch) => {};
-// };
+//TODO:: Implement this
+export const handleToggleTodo = (id) => {
+  return async (dispatch) => {};
+};
 
-// const handleUpdateTodo = (id, todo) => {
-//   return async (dispatch) => {
-//     API.updateTodo(id, todo);
-//     updateTodo(id, todo);
-//   };
-// };
+export const handleUpdateTodo = (id, todo) => {
+  return async (dispatch) => {
+    console.log('update dispatch ', dispatch);
+    await API.updateTodo(id, todo);
+    const result = dispatch(updateTodo(id, todo));
+    console.log(result);
+  };
+};

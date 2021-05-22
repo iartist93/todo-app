@@ -8,52 +8,29 @@ import {
 import { initialState } from '../store';
 
 export default function reducer(state = initialState, action) {
+  console.log('reducer ', action);
+
   switch (action.type) {
     case RECIEVE_TODOS:
-      return {
-        ...state,
-        ...action.todos,
-      };
+      return [...state, ...action.todos];
     case ADD_TODO:
-      return {
-        ...state,
-        todoItems: [...state.todoItems, action.todo],
-      };
+      return [...state, action.todo];
     case REMOVE_TODO: {
-      const newTodos = state.todoItems.filter((todo) => todo.id !== action.id);
-      return {
-        ...state,
-        todoItems: newTodos,
-      };
+      const newTodos = state.filter((todo) => todo.id !== action.id);
+      return newTodos;
     }
     case UPDATE_TODO: {
-      let todos = [...state.todoItems];
-      todos = todos.map((todo) => {
-        if (todo.id === action.id) {
-          todo = action.todo;
-        }
-        return todo;
+      return state.map((todo) => {
+        return todo.id === action.id ? { ...todo, ...action.todo } : todo;
       });
-      return {
-        ...state,
-        todoItems: todos,
-      };
     }
     case TOGGLE_TODO: {
-      let todos = [...state.todoItems];
-      todos = todos.map((todo) => {
-        if (todo.id === action.id) {
-          todo.completed = !todo.completed;
-        }
+      return state.map((todo) => {
+        todo.completed =
+          todo.id === action.id ? !todo.completed : todo.completed;
         return todo;
       });
-
-      return {
-        ...state,
-        todoItems: todos,
-      };
     }
-
     default:
       return state;
   }

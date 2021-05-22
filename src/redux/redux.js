@@ -124,8 +124,6 @@ export const applyMiddlewares = (...middlewares) => {
     // those middlwares will be executed from left to right
     const dispatch = compose(...chain)(store.dispatch);
 
-    console.log(typeof dispatch);
-
     // return the new store with altered dispatch
     return {
       ...store,

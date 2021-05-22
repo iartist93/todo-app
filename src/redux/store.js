@@ -11,7 +11,8 @@ const todoItem = {
   shelf: 'shelf1',
 };
 
-export const initialState = { todoItems: [todoItem] };
+// export const initialState = [todoItem];
+export const initialState = [];
 
 const store = createStore(todoReducer, initialState, middlewares);
 export default store;

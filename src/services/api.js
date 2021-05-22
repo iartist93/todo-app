@@ -5,8 +5,9 @@ export const saveState = async (state) => {
 };
 
 export const getState = async () => {
-  const data = localStorage.getItem(TODO_ITEMS_KEY);
-  return JSON.parse(data);
+  let data = localStorage.getItem(TODO_ITEMS_KEY);
+  //TODO:: Refactor this. Should be generic not just array
+  return data ? JSON.parse(data) : [];
 };
 
 export const removeState = async () => {
@@ -15,54 +16,47 @@ export const removeState = async () => {
 
 export const addTodo = async (todo) => {
   const state = await getState();
-  console.log(state);
-  const todoItems = state.todoItems;
-  const newList = [...todoItems, todo];
-  state.todoItems = newList;
-  await saveState(state);
-  console.log(state);
+  //console.log('ls add pre ', state);
+  await saveState([...state, todo]);
+  //console.log('ls add after ', [...state, todo]);
 };
 
 export const updateTodo = async (id, todoUpdates) => {
   const state = await getState();
-  console.log(state);
-  const todoItems = state.todoItems;
-  const todo = todoItems.find((item) => item.id === id);
-  todoItems[id] = [...todo, ...todoUpdates];
-  state.todoItems = todoItems;
-  await saveState(state);
-  console.log(state);
+  //console.log('ls update pre ', state);
+  const todo = state.find((item) => item.id === id);
+  console.log('found ', todo);
+  const newState = state.map((todo) => {
+    return todo.id === id ? { ...todo, ...todoUpdates } : todo;
+  });
+  await saveState(newState);
 };
 
 export const removeTodo = async (id) => {
   const state = await getState();
-  console.log(state);
-  const todoItems = state.todoItems;
-  const newList = todoItems.filter((todo) => todo.id !== id);
-  state.todoItems = newList;
+  //console.log('ls remove pre ', state);
+  const newList = state.filter((todo) => todo.id !== id);
   await saveState(newList);
-  console.log(state);
+  //console.log('ls remove after ', state);
 };
 
 /*
-const state = {
-  todoItems: [
-    {
-      id: 0,
-      text: 'todo 1',
-      completed: false
-    },
-    {
-      id: 1,
-      text: 'todo 2',
-      completed: false
-    },
-    {
-      id: 2,
-      text: 'todo 3',
-      completed: false
-    }
-  ]
-};
+const state = [
+  {
+    id: 0,
+    text: 'todo 1',
+    completed: false,
+  },
+  {
+    id: 1,
+    text: 'todo 2',
+    completed: false,
+  },
+  {
+    id: 2,
+    text: 'todo 3',
+    completed: false,
+  },
+];
 
 */

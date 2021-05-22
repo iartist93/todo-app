@@ -1,10 +1,17 @@
 import { drag } from './drag';
 import store from './redux/store';
-import { addTodo, removeTodo, toggleTodo } from './redux/actions/todo.a';
+import {
+  handleRecieveTodos,
+  handleAddTodo,
+  handleUpdateTodo,
+  handleRemoveTodo,
+  handleToggleTodo,
+} from './redux/actions/todo.a';
 
 //-----------------------------------------------------------//
 // subscribe to state change
 
+store.dispatch(handleRecieveTodos());
 store.subscribe(() => onStateUpdate());
 
 //-----------------------------------------------------------//
@@ -48,7 +55,7 @@ form.onsubmit = (e) => {
   };
 
   // Dispatch an action to add a new todo
-  store.dispatch(addTodo(newTodo));
+  store.dispatch(handleAddTodo(newTodo));
   todoTextInput.value = '';
   todoTextContent.value = '';
 };
@@ -58,7 +65,7 @@ form.onsubmit = (e) => {
 
 const onStateUpdate = () => {
   // Get updated state with getState
-  const { todoItems } = store.getState();
+  const todoItems = store.getState();
 
   // clear the current UI list
   todoShelves.forEach((shelf) => (shelf.innerHTML = ''));
@@ -100,14 +107,14 @@ const onStateUpdate = () => {
       todoCheckbox.type = 'checkbox';
       todoCheckbox.checked = todoItem.completed;
       todoCheckbox.onchange = () => {
-        store.dispatch(toggleTodo(todoItem.id));
+        store.dispatch(handleToggleTodo(todoItem.id));
       };
 
       // delete button
       todoDelete.className = 'todo-delete';
       todoDelete.textContent = '✖';
       todoDelete.onclick = () => {
-        store.dispatch(removeTodo(todoItem.id));
+        store.dispatch(handleRemoveTodo(todoItem.id));
       };
 
       // UI builder
@@ -128,25 +135,23 @@ const onStateUpdate = () => {
 // Temp reference
 
 /*
-const state = {
-  todoItems: [
-    {
-      id: 0,
-      text: 'todo 1',
-      completed: false
-    },
-    {
-      id: 1,
-      text: 'todo 2',
-      completed: false
-    },
-    {
-      id: 2,
-      text: 'todo 3',
-      completed: false
-    }
-  ]
-};
+const state = [
+  {
+    id: 0,
+    text: 'todo 1',
+    completed: false,
+  },
+  {
+    id: 1,
+    text: 'todo 2',
+    completed: false,
+  },
+  {
+    id: 2,
+    text: 'todo 3',
+    completed: false,
+  },
+];
 
 */
 
