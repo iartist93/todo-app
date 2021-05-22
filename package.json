@@ -9,18 +9,18 @@
   "description": "Todo app using vanilla-js and custom redux implementation",
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html --open --no-source-maps",
+    "start": "parcel serve index.html",
     "build": "parcel build index.html",
     "dev": "cross-env NODE_ENV=production parcel build index.html --no-minify",
     "test": "npm run dev && cd ./dist && parcel index.html"
   },
   "dependencies": {
     "cross-env": "^7.0.3",
-    "parcel-bundler": "^1.6.1",
     "redux": "4.1.0"
   },
   "devDependencies": {
-    "@babel/core": "7.2.0"
+    "@babel/core": "7.2.0",
+    "parcel": "^2.0.0-beta.3.1"
   },
   "browserslist": {
     "production": [
@@ -28,11 +28,7 @@
       "not dead",
       "not op_mini all"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "browserslist": "> 0.2%"
   },
   "resolutions": {
     "@babel/preset-env": "7.13.8"

@@ -53,5 +53,6 @@ https://oknext.netlify.app
 - [ ] Decide what databse solution to use for online presistance.
 - [ ] Ad animation to todo item when dragged, e.g. rotate, based on the drag speed.
 - [ ] Deleted todo move to trash first.
+- [ ] Ctrl+Z will undo last action.
 
 ---
