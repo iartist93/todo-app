@@ -9,18 +9,20 @@
   "description": "Todo app using vanilla-js and custom redux implementation",
   "main": "index.html",
   "scripts": {
-    "start": "parcel serve index.html",
+    "start": "parcel index.html --open",
     "build": "parcel build index.html",
     "dev": "cross-env NODE_ENV=production parcel build index.html --no-minify",
     "test": "npm run dev && cd ./dist && parcel index.html"
   },
   "dependencies": {
-    "cross-env": "^7.0.3",
-    "redux": "4.1.0"
+    "cross-env": "^7.0.3"
   },
   "devDependencies": {
-    "@babel/core": "7.2.0",
-    "parcel": "^2.0.0-beta.3.1"
+    "@babel/core": "^7.0.0-0",
+    "@babel/preset-react": "^7.13.13",
+    "@parcel/babel-plugin-transform-runtime": "^2.0.0-nightly.1823",
+    "@parcel/babel-preset-env": "^2.0.0-alpha.3",
+    "parcel-bundler": "^1.12.5"
   },
   "browserslist": {
     "production": [
@@ -28,10 +30,20 @@
       "not dead",
       "not op_mini all"
     ],
-    "browserslist": "> 0.2%"
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
-  "resolutions": {
-    "@babel/preset-env": "7.13.8"
+  "babel": {
+    "presets": [
+      "@parcel/babel-preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@parcel/babel-plugin-transform-runtime"
+    ]
   },
   "keywords": []
 }
